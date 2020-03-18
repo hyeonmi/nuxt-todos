@@ -1,7 +1,7 @@
 export const state = () => ({
   todos: [],
   visibility: 'all',
-  todo: null
+  selectedTodo: null
 })
 
 export const mutations = {
@@ -12,10 +12,10 @@ export const mutations = {
     state.todos = state.todos.filter(todo => todo.id !== id)
   },
   EDIT_TODO (state, text) {
-    state.todo.text = text
-    const findIndex = state.todos.findIndex(todo => todo.id === state.todo.id)
-    state.todos.splice(findIndex, 1, state.todo)
-    state.todo = null
+    state.selectedTodo.text = text
+    const findIndex = state.todos.findIndex(todo => todo.id === state.selectedTodo.id)
+    state.todos.splice(findIndex, 1, state.selectedTodo)
+    state.selectedTodo = null
   },
   TOGGLE_TODO (state, id) {
     const todo = state.todos.find(todo => todo.id === id)
@@ -28,7 +28,7 @@ export const mutations = {
     state.visibility = visibility
   },
   SET_EDIT_TODO (state, todo) {
-    state.todo = todo
+    state.selectedTodo = todo
   }
 }
 
@@ -55,7 +55,7 @@ export const actions = {
   updateVisibility ({ commit }, visibility) {
     commit('UPDATE_VISIBILITY', visibility)
   },
-  settodo ({ commit }, todo) {
+  setTodo ({ commit }, todo) {
     commit('SET_EDIT_TODO', todo)
   }
 }
@@ -69,6 +69,9 @@ export const getters = {
     } else {
       return state.todos
     }
+  },
+  todo (state, id) {
+    return state.todos.finde(todo => todo.id === id)
   },
   completedCount (state) {
     return state.todos.filter(todo => todo.completed).length

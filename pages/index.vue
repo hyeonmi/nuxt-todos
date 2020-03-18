@@ -3,8 +3,10 @@
     <ul>
       <li v-for="todo in getFilteredTodos" :key="todo.id">
         <input :checked="todo.completed" type="checkbox" @change="toggleTodo(todo.id)">
-        <span>{{ todo.text }}</span>
-        <button type="button" @click="removeTodo(todo.id)">
+        <nuxt-link :to="`/todo/${todo.id}`">
+          <span @click="setTodo(todo)">{{ todo.text }}</span>
+        </nuxt-link>
+        <button type="button" @click.prevent="removeTodo(todo.id)">
           delete
         </button>
       </li>
@@ -15,9 +17,8 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 export default {
-  name: 'TodoList',
   methods: {
-    ...mapActions(['removeTodo', 'toggleTodo'])
+    ...mapActions(['removeTodo', 'toggleTodo', 'setTodo'])
   },
   computed: {
     ...mapGetters(['getFilteredTodos'])
