@@ -1,9 +1,9 @@
 <template>
   <div>
-    <nuxt-link to="/">
+    <nuxt-link :to="`/`">
       List
     </nuxt-link> |
-    <nuxt-link to="/todo/create">
+    <nuxt-link :to="`/todo/create`">
       Create
     </nuxt-link>
   </div>

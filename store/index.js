@@ -13,7 +13,9 @@ export const mutations = {
   },
   EDIT_TODO (state, text) {
     state.selectedTodo.text = text
-    const findIndex = state.todos.findIndex(todo => todo.id === state.selectedTodo.id)
+    const findIndex = state.todos.findIndex(
+      todo => todo.id === state.selectedTodo.id
+    )
     state.todos.splice(findIndex, 1, state.selectedTodo)
     state.selectedTodo = null
   },
