@@ -17,6 +17,10 @@ export const mutations = {
     state.todos.splice(findIndex, 1, state.todo)
     state.todo = null
   },
+  TOGGLE_TODO (state, id) {
+    const todo = state.todos.find(todo => todo.id === id)
+    todo.completed = !todo.completed
+  },
   REMOVE_COMPLETED_TODO (state) {
     state.todos = state.todos.filter(todo => !todo.completed)
   },
@@ -38,6 +42,9 @@ export const actions = {
   },
   removeTodo ({ commit }, id) {
     commit('REMOVE_TODO', id)
+  },
+  toggleTodo ({ commit }, id) {
+    commit('TOGGLE_TODO', id)
   },
   editTodo ({ commit }, text) {
     commit('EDIT_TODO', text)
