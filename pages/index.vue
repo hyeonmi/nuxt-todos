@@ -32,3 +32,8 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+ul{padding:0px}
+li{list-style:none}
+</style>
