@@ -9,6 +9,11 @@
         <button type="button" @click.prevent="removeTodo(todo.id)">
           delete
         </button>
+        <nuxt-link :to="`/todo/edit`">
+          <button type="button" @click="setTodo(todo)">
+            edit
+          </button>
+        </nuxt-link>
       </li>
     </ul>
   </div>

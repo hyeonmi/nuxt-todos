@@ -1,31 +1,20 @@
 <template>
   <div>
     <h1>Create Todo</h1>
-    <input v-model="input" type="text" @keyup="inputTodo">
-    <button type="button" @click="addTodo">
-      ADD
-    </button>
+    <todo-input-form :callback="add" :mode="`add`" />
   </div>
 </template>
 
 <script>
 import { mapActions } from 'vuex'
+import TodoInputForm from '~/components/TodoInputForm'
 export default {
-  name: 'TodoInput',
-  data () {
-    return { input: '' }
+  components: {
+    TodoInputForm
   },
   methods: {
-    inputTodo (event) {
-      if (event.key !== 'Enter') { return }
-
-      this.addTodo()
-    },
-    addTodo () {
-      if (this.input.trim() === '') { return }
-
-      this.createTodo(this.input)
-      this.input = ''
+    add (input) {
+      this.createTodo(input)
 
       // redirect list
       this.$router.push('/')
