@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <ul>
-      <li v-for="todo in getFilteredTodos" :key="todo.id">
+      <li v-for="todo in todos" :key="todo.id">
         <input :checked="todo.completed" type="checkbox" @change="toggleTodo(todo.id)">
         <nuxt-link :to="`/todo/${todo.id}`">
           <span @click="setTodo(todo)">{{ todo.text }}</span>
@@ -26,7 +26,9 @@ export default {
     ...mapActions(['removeTodo', 'toggleTodo', 'setTodo'])
   },
   computed: {
-    ...mapGetters(['getFilteredTodos'])
+    ...mapGetters({
+      todos: 'getFilteredTodos'
+    })
   }
 }
 </script>

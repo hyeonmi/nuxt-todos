@@ -1,8 +1,8 @@
 <template>
   <div>
     <h1>Todo View</h1>
-    <span>{{ selectedTodo.completed ? "완료" : "미완료" }}</span>
-    <p>{{ selectedTodo.text }}</p>
+    <span>{{ todo.completed ? "완료" : "미완료" }}</span>
+    <p>{{ todo.text }}</p>
   </div>
 </template>
 
@@ -11,7 +11,7 @@ import { mapState } from 'vuex'
 export default {
   computed: {
     ...mapState({
-      selectedTodo: state => state.selectedTodo
+      todo: state => state.selectedTodo
     })
   }
 }
