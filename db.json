@@ -3,11 +3,21 @@
     {
       "id": "todo-1584926194640",
       "text": "API 방식으로 변경하기",
-      "completed": false
+      "completed": true
     },
     {
       "id": "todo-1584930322409",
       "text": "할일 목록 필터 기능 추가",
+      "completed": true
+    },
+    {
+      "id": "todo-1584938201514",
+      "text": "Vue.js 코딩 공작소 읽기",
+      "completed": false
+    },
+    {
+      "id": "todo-1584938222329",
+      "text": "영어 문장 5개 외우기",
       "completed": false
     }
   ]

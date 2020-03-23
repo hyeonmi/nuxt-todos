@@ -80,9 +80,6 @@ export const getters = {
       return state.todos
     }
   },
-  todo (state, id) {
-    return state.todos.finde(todo => todo.id === id)
-  },
   completedCount (state) {
     return state.todos.filter(todo => todo.completed).length
   }
