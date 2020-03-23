@@ -16,13 +16,18 @@
         </nuxt-link>
       </li>
     </ul>
+    <todo-footer />
   </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import TodoFooter from '~/components/TodoFooter'
 
 export default {
+  components: {
+    TodoFooter
+  },
   computed: {
     ...mapGetters({
       todos: 'getFilteredTodos'

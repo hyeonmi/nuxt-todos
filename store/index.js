@@ -52,8 +52,15 @@ export const actions = {
     const todos = await TodoService.getTodos()
     commit('INIT_TODOS', todos)
   },
-  removeCompletedTodo ({ commit }) {
-    commit('REMOVE_COMPLETED_TODO')
+  removeCompletedTodo ({ commit, state }) {
+    const completedTodos = state.todos.filter(todo => todo.completed)
+    const promiseAll = completedTodos.map(todo => TodoService.deleteTodo(todo.id))
+
+    Promise.all(promiseAll)
+      .then(async () => {
+        const todos = await TodoService.getTodos()
+        commit('INIT_TODOS', todos)
+      })
   },
   updateVisibility ({ commit }, visibility) {
     commit('UPDATE_VISIBILITY', visibility)
