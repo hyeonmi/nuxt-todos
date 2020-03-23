@@ -21,14 +21,18 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
+
 export default {
-  methods: {
-    ...mapActions(['removeTodo', 'toggleTodo', 'setTodo'])
-  },
   computed: {
     ...mapGetters({
       todos: 'getFilteredTodos'
     })
+  },
+  beforeCreate () {
+    this.$store.dispatch('initTodos')
+  },
+  methods: {
+    ...mapActions(['removeTodo', 'toggleTodo', 'setTodo'])
   }
 }
 </script>

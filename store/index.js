@@ -1,3 +1,5 @@
+import TodoService from '~/service/todos'
+
 export const state = () => ({
   todos: [],
   visibility: 'all',
@@ -5,26 +7,8 @@ export const state = () => ({
 })
 
 export const mutations = {
-  ADD_TODO (state, todo) {
-    state.todos.push(todo)
-  },
-  REMOVE_TODO (state, id) {
-    state.todos = state.todos.filter(todo => todo.id !== id)
-  },
-  EDIT_TODO (state, text) {
-    state.selectedTodo.text = text
-    const findIndex = state.todos.findIndex(
-      todo => todo.id === state.selectedTodo.id
-    )
-    state.todos.splice(findIndex, 1, state.selectedTodo)
-    state.selectedTodo = null
-  },
-  TOGGLE_TODO (state, id) {
-    const todo = state.todos.find(todo => todo.id === id)
-    todo.completed = !todo.completed
-  },
-  REMOVE_COMPLETED_TODO (state) {
-    state.todos = state.todos.filter(todo => !todo.completed)
+  INIT_TODOS (state, todos) {
+    state.todos = todos
   },
   UPDATE_VISIBILITY (state, visibility) {
     state.visibility = visibility
@@ -35,21 +19,38 @@ export const mutations = {
 }
 
 export const actions = {
-  createTodo ({ commit }, text) {
-    commit('ADD_TODO', {
+  async initTodos ({ commit }) {
+    const todos = await TodoService.getTodos()
+    commit('INIT_TODOS', todos)
+  },
+  async createTodo ({ commit }, text) {
+    await TodoService.addTodo({
       id: `todo-${Date.now()}`,
       text,
       completed: false
     })
   },
-  removeTodo ({ commit }, id) {
-    commit('REMOVE_TODO', id)
+  async removeTodo ({ commit }, id) {
+    await TodoService.deleteTodo(id)
+    const todos = await TodoService.getTodos()
+    commit('INIT_TODOS', todos)
   },
-  toggleTodo ({ commit }, id) {
-    commit('TOGGLE_TODO', id)
+  async editTodo ({ commit, state }, text) {
+    await TodoService.updateTodo({
+      ...state.selectedTodo,
+      text
+    })
+    commit('SET_EDIT_TODO', null)
   },
-  editTodo ({ commit }, text) {
-    commit('EDIT_TODO', text)
+  async toggleTodo ({ commit, state }, id) {
+    const todo = state.todos.find(todo => todo.id === id)
+    await TodoService.updateTodo({
+      ...todo,
+      completed: !todo.completed
+    })
+
+    const todos = await TodoService.getTodos()
+    commit('INIT_TODOS', todos)
   },
   removeCompletedTodo ({ commit }) {
     commit('REMOVE_COMPLETED_TODO')
