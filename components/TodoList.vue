@@ -25,9 +25,6 @@ export default {
       todos: 'getFilteredTodos'
     })
   },
-  beforeCreate () {
-    this.$store.dispatch('initTodos')
-  },
   methods: {
     ...mapActions(['removeTodo', 'toggleTodo', 'setTodo'])
   }

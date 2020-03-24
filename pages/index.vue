@@ -13,6 +13,9 @@ export default {
   components: {
     TodoList,
     TodoFooter
+  },
+  async fetch ({ store }) {
+    await store.dispatch('fetchTodo')
   }
 }
 </script>

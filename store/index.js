@@ -7,7 +7,7 @@ export const state = () => ({
 })
 
 export const mutations = {
-  INIT_TODOS (state, todos) {
+  FETCH_TODOS (state, todos) {
     state.todos = todos
   },
   UPDATE_VISIBILITY (state, visibility) {
@@ -19,9 +19,9 @@ export const mutations = {
 }
 
 export const actions = {
-  async initTodos ({ commit }) {
+  async fetchTodo ({ commit }) {
     const todos = await TodoService.getTodos()
-    commit('INIT_TODOS', todos)
+    commit('FETCH_TODOS', todos)
   },
   async createTodo ({ commit }, text) {
     await TodoService.addTodo({
@@ -33,7 +33,7 @@ export const actions = {
   async removeTodo ({ commit }, id) {
     await TodoService.deleteTodo(id)
     const todos = await TodoService.getTodos()
-    commit('INIT_TODOS', todos)
+    commit('FETCH_TODOS', todos)
   },
   async editTodo ({ commit, state }, text) {
     await TodoService.updateTodo({
@@ -50,7 +50,7 @@ export const actions = {
     })
 
     const todos = await TodoService.getTodos()
-    commit('INIT_TODOS', todos)
+    commit('FETCH_TODOS', todos)
   },
   removeCompletedTodo ({ commit, state }) {
     const completedTodos = state.todos.filter(todo => todo.completed)
@@ -59,7 +59,7 @@ export const actions = {
     Promise.all(promiseAll)
       .then(async () => {
         const todos = await TodoService.getTodos()
-        commit('INIT_TODOS', todos)
+        commit('FETCH_TODOS', todos)
       })
   },
   updateVisibility ({ commit }, visibility) {
