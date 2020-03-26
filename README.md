@@ -1,6 +1,6 @@
 # nuxt-todos
 
-> My smashing Nuxt.js project
+> todos exmaple with nuxt.js
 
 ## Build Setup
 
@@ -17,6 +17,9 @@ $ npm run start
 
 # generate static project
 $ npm run generate
+
+# excute test
+$ npm run test
 ```
 
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
