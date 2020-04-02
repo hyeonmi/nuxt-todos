@@ -1,7 +1,7 @@
 <template>
   <ul>
     <li v-for="todo in todos" :key="todo.id">
-      <input :checked="todo.completed" type="checkbox" @change="toggleTodo(todo.id)">
+      <input :value="todo.completed" :checked="todo.completed" type="checkbox" @change="toggleTodo(todo.id)">
       <nuxt-link :to="`/todo/${todo.id}`">
         <span @click="setTodo(todo)">{{ todo.text }}</span>
       </nuxt-link>
